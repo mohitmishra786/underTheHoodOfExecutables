@@ -30,6 +30,22 @@ $ ls -l hello
 
 Wait, what? Over 16 kilobytes just to print a simple message? That's thousands of times larger than our source code! Let's investigate why.
 
+## Executable Files: Not Just Your Code
+
+An executable file on Linux is not merely a raw dump of your compiled C code. Instead, it's a meticulously organized structure containing various segments of information crucial for the operating system to load and execute your program.  
+
+These segments serve diverse purposes:
+
+* **Code Segment (`.text`):** This section houses the heart of your program - the compiled machine instructions generated from your C code. It's where the `printf` function call and the loop logic in a more complex program would reside.
+* **Data Segments (`.data`, `.rodata`, `.bss`):** These segments hold the variables and constants used by your program.  Initialized global variables find their home in `.data`, constant values (like the string "Hello, world!") reside in `.rodata`, and uninitialized global variables are allocated space in `.bss`.
+* **Header Information:** Executable files begin with a header that acts as a guide for the operating system. It contains essential metadata about the program, such as:
+    * The type of architecture it's designed to run on (e.g., x86-64).
+    * Entry point: The address within the code segment where execution should begin.
+    * Section information: The layout and sizes of the various segments within the file.
+* **Symbol Table:** This table plays a critical role in linking (which we'll explore in-depth in later posts). It maps function and variable names used in your code to their corresponding addresses within the executable. This mapping is essential for resolving references between different parts of your program or when linking with external libraries.
+* **Relocation Information:**  This section comes into play when your program is loaded into memory. It contains instructions for the linker to adjust memory addresses within the code, ensuring that references to functions, variables, and data structures point to the correct locations.
+* **Debugging Information:** If you compile your program with debugging symbols (using the `-g` flag with `gcc`), the executable file will also include debug information.  This information allows debuggers like `gdb` to correlate machine instructions back to your original C code, making it possible to step through your program line by line and inspect variables during execution. 
+
 ## Peering Inside the Executable
 
 To understand what makes up our executable, we'll use `objdump`, a powerful tool for examining binary files. Let's look at the program's sections:
