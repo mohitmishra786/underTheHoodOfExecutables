@@ -1,31 +1,53 @@
-# From Source to Binary: A C Programmer's Guide to Linking and Loading
+# Under The Hood Of Executables 🔍
 
-**Chapter Breakdown:**
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![Made with Love](https://img.shields.io/badge/Made%20with-❤-red.svg)](https://github.com/mohitmishra786/underTheHoodOfExecutables)
 
-**Part 1: Building Blocks**
+An in-depth exploration of how C programs transform from source code to executable binaries. This repository contains a comprehensive guide to understanding linking, loading, and executable formats.
 
-* **Chapter 1: The Mystery of Executable Size** 
-* **Chapter 2: ELF: Unpacking the Executable and Link Format** 
-* **Chapter 3: Sections: Organizing Code and Data** 
-* **Chapter 4: Global Variables and Initialization** 
+## 📚 Book Website
 
-**Part 2: The Linker's Dance**
+Visit our interactive book website: [Under The Hood Of Executables](https://mohitmishra786.github.io/underTheHoodOfExecutables/)
 
-* **Chapter 5: The Linker's Role: Piecing Together the Puzzle** 
-* **Chapter 6: Relocations: Patching the Code** 
-* **Chapter 7: Symbols: Identifying and Resolving References**
-* **Chapter 8: Linker Scripts: Controlling the Layout** 
+## 🌟 Features
 
-**Part 3: Dynamic Linking: Sharing and Flexibility**
+- Detailed explanations of ELF format
+- Deep dive into linking and loading processes
+- Practical examples and case studies
+- Interactive diagrams and illustrations
+- Step-by-step tutorials
+- Real-world applications
+- Performance optimization insights
 
-* **Chapter 9: Dynamic Linking: Sharing Code and Resources**
-* **Chapter 10: The Dynamic Linking Process: Lazy Loading and Resolution** 
-* **Chapter 11: Controlling Dynamic Linking Behavior** 
+## 📖 Content Structure
 
-**Part 4: Advanced Linking and Optimization**
+The book is organized into five parts, each focusing on different aspects of the compilation and linking process. [View detailed content structure](index.md)
 
-* **Chapter 12: Weak Symbols and Link-Time Optimization** 
+## 🚀 Getting Started
 
-**Part 5: Looking Ahead**
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/mohitmishra786/underTheHoodOfExecutables.git
+   ```
 
-* **Chapter 13: Conclusion: A Deeper Understanding**  
+2. Navigate to the chapter you're interested in:
+   ```bash
+   cd underTheHoodOfExecutables
+   ```
+
+3. Read the chapters in markdown format or visit our [website](https://mohitmishra786.github.io/underTheHoodOfExecutables/) for an enhanced reading experience.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please read our [Contributing Guidelines](CONTRIBUTING.md) and [Code of Conduct](CODE_OF_CONDUCT.md) before getting started.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- All contributors who have helped improve this guide
+- The C programming community
+- Open source tools and documentation that made this possible
