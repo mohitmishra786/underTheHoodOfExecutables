@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Under The Hood Of Executables</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown.min.css">
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #24292e;
+            --link-color: #0366d6;
+            --nav-bg: #f6f8fa;
+            --border-color: #e1e4e8;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #0d1117;
+            --text-color: #c9d1d9;
+            --link-color: #58a6ff;
+            --nav-bg: #161b22;
+            --border-color: #30363d;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background-color: var(--nav-bg);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            z-index: 1000;
+        }
+
+        .nav-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: var(--text-color);
+        }
+
+        .controls {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            color: var(--text-color);
+        }
+
+        .nav-button {
+            padding: 8px 16px;
+            background-color: var(--link-color);
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .nav-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 80px auto 40px;
+            padding: 20px;
+        }
+
+        .markdown-body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        .markdown-body a {
+            color: var(--link-color);
+        }
+
+        #nextTitle, #prevTitle {
+            font-size: 12px;
+            margin-top: 4px;
+            opacity: 0.8;
+        }
+
+        .nav-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        @media (max-width: 767px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .nav-title {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="nav-group">
+            <button id="prevButton" class="nav-button" onclick="navigatePage('prev')" disabled>Previous</button>
+            <div id="prevTitle"></div>
+        </div>
+        <span class="nav-title">Under The Hood Of Executables</span>
+        <div class="controls">
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <circle cx="10" cy="10" r="4"/>
+                    <path d="M10,0 L10,2 M10,18 L10,20 M0,10 L2,10 M18,10 L20,10 M2.93,2.93 L4.34,4.34 M15.66,15.66 L17.07,17.07 M2.93,17.07 L4.34,15.66 M15.66,4.34 L17.07,2.93"></path>
+                </svg>
+            </button>
+            <div class="nav-group">
+                <button id="nextButton" class="nav-button" onclick="navigatePage('next')">Next</button>
+                <div id="nextTitle"></div>
+            </div>
+        </div>
+    </header>
+    <main class="container">
+        <div id="content" class="markdown-body"></div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/13.0.1/markdown-it.min.js"></script>
+    <script>
+        const pages = [
+            { path: 'README.md', title: 'Index' },
+            { path: 'Ch-1-The-Mystery-Of-Executable-Size/Why is my "Hello World" so Big?.md', title: 'Chapter 1: Why is my "Hello World" so Big?' },
+            { path: 'Ch-2-The-Executable-And-Linkable-Format/Demystifying-the-Executable-Format.md', title: 'Chapter 2: Demystifying the Executable Format' },
+            { path: 'Ch-3-Sections-Organizing-Code-And-Data/Understanding-ELF-Sections.md', title: 'Chapter 3: Understanding ELF Sections' },
+            { path: 'Ch-4-Global-Variables-And-Initialization/The-Secret-Life-of-Global-Variables-in-C.md', title: 'Chapter 4: The Secret Life of Global Variables in C' },
+            { path: 'Ch-5-The-Linker\'s-Role/Bringing-The-C-Code-Together.md', title: 'Chapter 5: Bringing The C Code Together' },
+            { path: 'Ch-6-Relocations-Patching-The-Code/The Linker\'s Patchwork.md', title: 'Chapter 6: The Linker\'s Patchwork' },
+            { path: 'Ch-7-Symbols/Symbols.md', title: 'Chapter 7: Symbols' },
+            { path: 'Ch-8-Customizing-The-Layout/Introduction-To-Linker-Scripts.md', title: 'Chapter 8: Introduction To Linker Scripts' },
+            { path: 'Ch-9-Dynamic-Linking/Shrinking Executables and Sharing Code.md', title: 'Chapter 9: Shrinking Executables and Sharing Code' },
+            { path: 'Ch-10-Dynamic-Linking-Process/Lazy Loading: Dynamic Linking on Demand.md', title: 'Chapter 10: Lazy Loading - Dynamic Linking on Demand' },
+            { path: 'Ch-11-Controlling-Dynamic-Linking-Behavior/Taking-Control-Environment-Variables-For-Dynamic-Linking.md', title: 'Chapter 11: Taking Control - Environment Variables For Dynamic Linking' },
+            { path: 'Ch-12-Weak-Symbols/Weak Symbols: A Linker\'s Flexibility.md', title: 'Chapter 12: Weak Symbols - A Linker\'s Flexibility' },
+            { path: 'Ch-13-Final-Chapter/Level-Up-Your-C.md', title: 'Chapter 13: Level Up Your C' }
+        ];
+
+        let currentPageIndex = 0;
+        const md = window.markdownit();
+        const themeToggle = document.getElementById('themeToggle');
+        const prevButton = document.getElementById('prevButton');
+        const nextButton = document.getElementById('nextButton');
+        const content = document.getElementById('content');
+        const prevTitle = document.getElementById('prevTitle');
+        const nextTitle = document.getElementById('nextTitle');
+
+        // Theme handling
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+        });
+
+        // Initialize theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        setTheme(savedTheme);
+
+        // Navigation
+        function updateNavigation() {
+            prevButton.disabled = currentPageIndex === 0;
+            nextButton.disabled = currentPageIndex === pages.length - 1;
+            
+            prevTitle.textContent = currentPageIndex > 0 ? pages[currentPageIndex - 1].title : '';
+            nextTitle.textContent = currentPageIndex < pages.length - 1 ? pages[currentPageIndex + 1].title : '';
+        }
+
+        async function loadPage(index) {
+            try {
+                const response = await fetch(pages[index].path);
+                const text = await response.text();
+                content.innerHTML = md.render(text);
+                document.title = pages[index].title + ' - Under The Hood Of Executables';
+                currentPageIndex = index;
+                updateNavigation();
+                window.scrollTo(0, 0);
+            } catch (error) {
+                console.error('Error loading page:', error);
+                content.innerHTML = '<h1>Error loading page</h1><p>Please try again later.</p>';
+            }
+        }
+
+        function navigatePage(direction) {
+            const newIndex = direction === 'next' ? currentPageIndex + 1 : currentPageIndex - 1;
+            if (newIndex >= 0 && newIndex < pages.length) {
+                loadPage(newIndex);
+            }
+        }
+
+        // URL handling
+        function getPageIndexFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            const page = params.get('page');
+            if (page) {
+                const index = pages.findIndex(p => p.path === page);
+                return index >= 0 ? index : 0;
+            }
+            return 0;
+        }
+
+        // Initialize page
+        window.addEventListener('DOMContentLoaded', () => {
+            const initialIndex = getPageIndexFromURL();
+            loadPage(initialIndex);
+        });
+    </script>
+</body>
+</html>
