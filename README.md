@@ -22,7 +22,7 @@ Visit our interactive book website: [Under The Hood Of Executables](https://mohi
 
 ## 📖 Content Structure
 
-The book is organized into five parts, each focusing on different aspects of the compilation and linking process. [View detailed content structure](index.md)
+The book is organized into five parts, each focusing on different aspects of the compilation and linking process. [View detailed content structure](INDEX.md)
 
 ## 🚀 Getting Started
 
