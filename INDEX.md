@@ -3,7 +3,7 @@
 **Part 1: Building Blocks**
 
 * [**Chapter 1: The Mystery of Executable Size**](https://github.com/mohitmishra786/underTheHoodOfExecutables/tree/main/Ch-1-The-Mystery-Of-Executable-Size)
-  * [Why is my "Hello World" so Big?](https://github.com/mohitmishra786/underTheHoodOfExecutables/blob/main/Ch-1-The-Mystery-Of-Executable-Size/Why%20is%20my%20%22Hello%20World%22%20so%20Big%3F.md)
+  * [Why is my "Hello World" so Big?](https://github.com/mohitmishra786/underTheHoodOfExecutables/blob/main/Ch-1-The-Mystery-Of-Executable-Size/Why-is-my-Hello-World-so-Big.md)
 
 * [**Chapter 2: ELF: Unpacking the Executable and Link Format**](https://github.com/mohitmishra786/underTheHoodOfExecutables/tree/main/Ch-2-The-Executable-And-Linkable-Format)
   * [Demystifying the Executable Format](https://github.com/mohitmishra786/underTheHoodOfExecutables/blob/main/Ch-2-The-Executable-And-Linkable-Format/Demystifying-the-Executable-Format.md)
