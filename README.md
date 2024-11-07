@@ -8,7 +8,7 @@ An in-depth exploration of how C programs transform from source code to executab
 
 ## 📚 Book Website
 
-Visit our interactive book website: [Under The Hood Of Executables](https://mohitmishra786.github.io/underTheHoodOfExecutables/)
+Visit this book website: [Under The Hood Of Executables](https://mohitmishra786.github.io/underTheHoodOfExecutables/)
 
 ## 🌟 Features
 
