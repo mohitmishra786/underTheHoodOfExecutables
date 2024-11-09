@@ -170,20 +170,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/13.0.1/markdown-it.min.js"></script>
     <script>
         const pages = [
-            { path: 'INDEX.md', title: 'Index' },
-            { path: 'Ch-1-The-Mystery-Of-Executable-Size/Why-is-my-Hello-World-so-Big.md', title: 'Chapter 1: Why is my "Hello World" so Big?' },
-            { path: 'Ch-2-The-Executable-And-Linkable-Format/Demystifying-the-Executable-Format.md', title: 'Chapter 2: Demystifying the Executable Format' },
-            { path: 'Ch-3-Sections-Organizing-Code-And-Data/Understanding-ELF-Sections.md', title: 'Chapter 3: Understanding ELF Sections' },
-            { path: 'Ch-4-Global-Variables-And-Initialization/The-Secret-Life-of-Global-Variables-in-C.md', title: 'Chapter 4: The Secret Life of Global Variables in C' },
-            { path: 'Ch-5-The-Linker\'s-Role/Bringing-The-C-Code-Together.md', title: 'Chapter 5: Bringing The C Code Together' },
-            { path: 'Ch-6-Relocations-Patching-The-Code/The Linker\'s Patchwork.md', title: 'Chapter 6: The Linker\'s Patchwork' },
-            { path: 'Ch-7-Symbols/Symbols.md', title: 'Chapter 7: Symbols' },
-            { path: 'Ch-8-Customizing-The-Layout/Introduction-To-Linker-Scripts.md', title: 'Chapter 8: Introduction To Linker Scripts' },
-            { path: 'Ch-9-Dynamic-Linking/Shrinking Executables and Sharing Code.md', title: 'Chapter 9: Shrinking Executables and Sharing Code' },
-            { path: 'Ch-10-Dynamic-Linking-Process/Lazy Loading: Dynamic Linking on Demand.md', title: 'Chapter 10: Lazy Loading - Dynamic Linking on Demand' },
-            { path: 'Ch-11-Controlling-Dynamic-Linking-Behavior/Taking-Control-Environment-Variables-For-Dynamic-Linking.md', title: 'Chapter 11: Taking Control - Environment Variables For Dynamic Linking' },
-            { path: 'Ch-12-Weak-Symbols/Weak Symbols: A Linker\'s Flexibility.md', title: 'Chapter 12: Weak Symbols - A Linker\'s Flexibility' },
-            { path: 'Ch-13-Final-Chapter/Level-Up-Your-C.md', title: 'Chapter 13: Level Up Your C' }
+            { path: 'INDEX.md', title: 'Index Of Book' },
+            { path: 'src/Ch-1-The-Mystery-Of-Executable-Size/Why-is-my-Hello-World-so-Big.md', title: 'Chapter 1: Why is my "Hello World" so Big?' },
+            { path: 'src/Ch-2-The-Executable-And-Linkable-Format/Demystifying-the-Executable-Format.md', title: 'Chapter 2: Demystifying the Executable Format' },
+            { path: 'src/Ch-3-Sections-Organizing-Code-And-Data/Understanding-ELF-Sections.md', title: 'Chapter 3: Understanding ELF Sections' },
+            { path: 'src/Ch-4-Global-Variables-And-Initialization/The-Secret-Life-of-Global-Variables-in-C.md', title: 'Chapter 4: The Secret Life of Global Variables in C' },
+            { path: 'src/Ch-5-The-Linker\'s-Role/Bringing-The-C-Code-Together.md', title: 'Chapter 5: Bringing The C Code Together' },
+            { path: 'src/Ch-6-Relocations-Patching-The-Code/The Linker\'s Patchwork.md', title: 'Chapter 6: The Linker\'s Patchwork' },
+            { path: 'src/Ch-7-Symbols/Symbols.md', title: 'Chapter 7: Symbols' },
+            { path: 'src/Ch-8-Customizing-The-Layout/Introduction-To-Linker-Scripts.md', title: 'Chapter 8: Introduction To Linker Scripts' },
+            { path: 'src/Ch-9-Dynamic-Linking/Shrinking Executables and Sharing Code.md', title: 'Chapter 9: Shrinking Executables and Sharing Code' },
+            { path: 'src/Ch-10-Dynamic-Linking-Process/Lazy Loading: Dynamic Linking on Demand.md', title: 'Chapter 10: Lazy Loading - Dynamic Linking on Demand' },
+            { path: 'src/Ch-11-Controlling-Dynamic-Linking-Behavior/Taking-Control-Environment-Variables-For-Dynamic-Linking.md', title: 'Chapter 11: Taking Control - Environment Variables For Dynamic Linking' },
+            { path: 'src/Ch-12-Linux-Executable-Loading/Linux-Executable-Loading.md', title: 'Chapter 12: Linux Executable Loading' },
+            { path: 'src/Ch-13-Weak-Symbols/Weak Symbols: A Linker\'s Flexibility.md', title: 'Chapter 13: Weak Symbols - A Linker\'s Flexibility' },
+            { path: 'src/Ch-14-Final-Chapter/Level-Up-Your-C.md', title: 'Chapter 14: Level Up Your C' }
         ];
 
         let currentPageIndex = 0;
