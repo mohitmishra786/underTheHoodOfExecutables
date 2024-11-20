@@ -38,6 +38,16 @@ The book is organized into five parts, each focusing on different aspects of the
 
 3. Read the chapters in markdown format or visit our [website](https://mohitmishra786.github.io/underTheHoodOfExecutables/) for an enhanced reading experience.
 
+## Star History
+
+<a href="https://star-history.com/#mohitmishra786/underTheHoodOfExecutables&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=mohitmishra786/underTheHoodOfExecutables&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=mohitmishra786/underTheHoodOfExecutables&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=mohitmishra786/underTheHoodOfExecutables&type=Date" />
+ </picture>
+</a>
+
 ## 🤝 Contributing
 
 Contributions are welcome! Please read our [Contributing Guidelines](CONTRIBUTING.md) and [Code of Conduct](CODE_OF_CONDUCT.md) before getting started.
