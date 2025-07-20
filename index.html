@@ -168,6 +168,11 @@
         <div id="content" class="markdown-body"></div>
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/13.0.1/markdown-it.min.js"></script>
+    
+    <!-- GoatCounter Analytics -->
+    <script data-goatcounter="https://executables.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+    
     <script>
         const pages = [
             { path: 'INDEX.md', title: 'Index Of Book' },
@@ -239,6 +244,20 @@
                 currentPageIndex = index;
                 updateNavigation();
                 window.scrollTo(0, 0);
+                
+                // Update URL for better tracking and bookmarking
+                const url = new URL(window.location);
+                url.searchParams.set('page', pages[index].path);
+                window.history.pushState({}, '', url);
+                
+                // Track page view with GoatCounter
+                if (window.goatcounter && window.goatcounter.count) {
+                    window.goatcounter.count({
+                        path: location.pathname + location.search,
+                        title: pages[index].title,
+                        event: false
+                    });
+                }
             } catch (error) {
                 console.error('Error loading page:', error);
                 content.innerHTML = '<h1>Error loading page</h1><p>Please try again later.</p>';
